@@ -15,21 +15,24 @@ else
         AR = $(CC65_HOME)/bin/ar65
 endif
 
-all: $(SOURCES8) $(OBJECTS8) example
+all: $(SOURCES8) $(OBJECTS8) example after_success
 
 $(OBJECTS8): $(SOURCES8)
-	@mkdir target/telestrat/lib/ -p
+	@mkdir build/lib8/ -p
 	@mkdir tmp/src/ -p
 	@$(AS) -ttelestrat $(@:.o=.s) -o tmp/$@ --include-dir src/include
 	@$(AR) r $(NAME_LIB).lib  tmp/$@
-	@cp $(NAME_LIB).lib target/telestrat/lib/
+	@cp $(NAME_LIB).lib build/lib8/
 
 example:
-	@$(CC) -ttelestrat example/pbar.c pbar.lib -o pbar
+	@$(CC) -ttelestrat example/pbar.c build/lib8/pbar.lib -o build/bin/pbar
 
 clean:
 	rm src/*.o
 	rm $(NAME_LIB).lib
-	rm pbar
+	rm build/lib8/$(NAME_LIB).lib
+	rm build/bin/pbar
 
+after_success:
+	echo man not managed
 
