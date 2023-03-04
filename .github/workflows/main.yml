@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Cache sdk
         id: cache-sdk
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
              cc65/**/*
@@ -102,7 +102,7 @@ jobs:
           echo "::set-output name=REPO_NAME::${GITHUB_REPOSITORY##*/}"
 
       - name: Install sdk
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
              cc65/**/*
