@@ -25,6 +25,7 @@ $(OBJECTS8): $(SOURCES8)
 	@cp $(NAME_LIB).lib build/lib8/
 
 example:
+	@mkdir build/bin/ -p
 	@$(CC) -ttelestrat example/pbar.c build/lib8/pbar.lib -o build/bin/pbar
 
 clean:
