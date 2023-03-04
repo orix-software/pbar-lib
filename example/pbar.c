@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,7 +13,6 @@ int main() {
     for (i=0;i<34;i++) {
         for (wait=0;wait<1000;wait++);
         pbarRun(3, progressbar);
-
     }
 
     pbarEnd(progressbar);
