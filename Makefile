@@ -15,7 +15,8 @@ else
         AR = $(CC65_HOME)/bin/ar65
 endif
 
-all: $(SOURCES8) $(OBJECTS8) example after_success
+all: $(SOURCES8) $(OBJECTS8) binary after_success
+.PHONY : all
 
 $(OBJECTS8): $(SOURCES8)
 	@mkdir build/lib8/ -p
@@ -24,15 +25,22 @@ $(OBJECTS8): $(SOURCES8)
 	@$(AR) r $(NAME_LIB).lib  tmp/$@
 	@cp $(NAME_LIB).lib build/lib8/
 
-example:
+binary:
+	@echo build example
 	@mkdir build/bin/ -p
-	@$(CC) -ttelestrat example/pbar.c build/lib8/pbar.lib -o build/bin/pbar
+	@$(CC) -ttelestrat example/pbar.c build/lib8/pbar.lib -o pbar1000 --start-addr 2048
+	@$(CC) -ttelestrat example/pbar.c build/lib8/pbar.lib -o pbar2304 --start-addr 2304
+	@chmod +x dependencies/orix-sdk/bin/relocbin.py3
+	@dependencies/orix-sdk/bin/relocbin.py3 -o build/bin/pbar -2 pbar1000 pbar2304
 
 clean:
-	rm src/*.o
+	rm tmp/src/*.o
 	rm $(NAME_LIB).lib
 	rm build/lib8/$(NAME_LIB).lib
+	rmdir build/lib8/
 	rm build/bin/pbar
+	rmdir build/bin/
+
 
 after_success:
 	echo man not managed
