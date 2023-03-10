@@ -1,8 +1,14 @@
 # pbar lib
 
-This returns a pbar ptr struct (a malloc to the Orix kernel), arg is the type of the pbar, for instance one pbar type is available
+## Getting started
 
- * struct pbar *pbarInit(unsigned char pbartype);
+You can download .tgz into "libs" folder for example
+
+oricproject/$ mkdir libs
+oricproject/$ cd libs && curl http://repo.orix.oric.org/dists/2023.1/tgz/6502/pbar-lib.tgz
+oricproject/$tar xvfz http://repo.orix.oric.org/dists/2023.1/tgz/6502/pbar-lib.tgz
+
+"struct pbar *pbarInit(unsigned char pbartype)" returns a pbar ptr struct (a malloc to the Orix kernel), arg is the type of the pbar, for instance one pbar type is available
 
 pbarRun display the next percentage and the next char for the progressbar. Each type the pbarRun is called, the bar add "3%" to the current percentage.
 Step arg is not used yet. pbarRun must be called 34 times to have almost the complete bar. pbarEnd will displays 100%  and will free pbar struct.
